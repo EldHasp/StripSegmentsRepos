@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace StripSegments
+namespace Models
 {
     /// <summary>Модель с исходными данными</summary>
-    public class StripModel
+    public class StripsModel
     {
         /// <summary>Асинхронное получение данных для первой коллекции.</summary>
         /// <param name="range">Диапазон фильтрации.</param>
@@ -17,7 +17,7 @@ namespace StripSegments
         /// Поступает в типе object, но должен содержать тип StripSegmentDto</param>
         /// <returns>Коллекцию элементов прошедших фильтр.</returns>
         private IList<StripSegmentDto> GetFirstSegments(object range)
-            => GetSecondSegments((StripSegmentDto) range);
+            => GetSecondSegments((StripSegmentDto)range);
 
         /// <summary>Синхронное получение данных для первой коллекции.</summary>
         /// <param name="range">Диапазон фильтрации.</param>
@@ -41,7 +41,7 @@ namespace StripSegments
         /// <summary>Асинхронное получение данных для второй коллекции.</summary>
         /// <param name="range">Диапазон фильтрации.</param>
         /// <returns>Коллекцию элементов прошедших фильтр.</returns>
-        public Task< IList<StripSegmentDto>> GetSecondSegmentsAsync(StripSegmentDto range)
+        public Task<IList<StripSegmentDto>> GetSecondSegmentsAsync(StripSegmentDto range)
             => Task.Factory.StartNew(GetSecondSegments, range);
 
         /// <summary>Перегрузка для использовании в Task.</summary>
@@ -49,7 +49,7 @@ namespace StripSegments
         /// Поступает в типе object, но должен содержать тип StripSegmentDto</param>
         /// <returns>Коллекцию элементов прошедших фильтр.</returns>
         private IList<StripSegmentDto> GetSecondSegments(object range)
-            => GetSecondSegments((StripSegmentDto) range);
+            => GetSecondSegments((StripSegmentDto)range);
 
         /// <summary>Синхронное получение данных для второй коллекции.</summary>
         /// <param name="range">Диапазон фильтрации.</param>
@@ -68,4 +68,5 @@ namespace StripSegments
             };
         }
     }
+
 }

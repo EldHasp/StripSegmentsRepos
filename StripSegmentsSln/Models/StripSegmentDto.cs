@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StripSegments
+namespace Models
 {
     /// <summary>DTO-класс Сегмента Полосы.</summary>
     public class StripSegmentDto : IEquatable<StripSegmentDto>
@@ -42,4 +42,5 @@ namespace StripSegments
                    End == other.End;
         }
     }
+
 }

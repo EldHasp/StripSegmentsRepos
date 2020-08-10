@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StripSegments", "StripSegme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D1444485-B6F1-4861-A7AC-779E8F1E6405}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{339D05AC-F841-4963-9472-6DEB09806BB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D1444485-B6F1-4861-A7AC-779E8F1E6405}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1444485-B6F1-4861-A7AC-779E8F1E6405}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1444485-B6F1-4861-A7AC-779E8F1E6405}.Release|Any CPU.Build.0 = Release|Any CPU
+		{339D05AC-F841-4963-9472-6DEB09806BB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{339D05AC-F841-4963-9472-6DEB09806BB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{339D05AC-F841-4963-9472-6DEB09806BB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{339D05AC-F841-4963-9472-6DEB09806BB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

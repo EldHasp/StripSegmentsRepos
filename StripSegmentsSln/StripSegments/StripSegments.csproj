@@ -55,8 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="StripModel.cs" />
-    <Compile Include="StripSegmentDto.cs" />
     <Compile Include="StripSegment.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +99,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{D1444485-B6F1-4861-A7AC-779E8F1E6405}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{339d05ac-f841-4963-9472-6deb09806bb7}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

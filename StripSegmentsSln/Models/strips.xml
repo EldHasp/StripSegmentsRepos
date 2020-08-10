@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <range>
+      <segment id="11111" begin="140.45" end="300.3"/>
+  </range>
+  <strips>
+    <strip id="1" name="первый">
+      <segment id="1" begin="123.45" end="145.3"/>
+      <segment id="2" begin="175.45" end="195.3"/>
+      <segment id="3" begin="230.45" end="245.3"/>
+      <segment id="4" begin="253.45" end="265.3"/>
+      <segment id="5555" begin="293.45" end="345.3"/>
+    </strip>
+    <strip id="3434" name="второй">
+      <segment id="1" begin="123.45" end="145.3"/>
+      <segment id="2" begin="175.45" end="195.3"/>
+      <segment id="3" begin="230.45" end="245.3"/>
+      <segment id="4" begin="253.45" end="265.3"/>
+      <segment id="5555" begin="293.45" end="345.3"/>
+    </strip>
+  </strips>
+</root>
