@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Models;
 using System.Windows;
 
 namespace StripSegments
@@ -13,5 +8,12 @@ namespace StripSegments
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {// В этой строке точка останова. После останова дальше по F11.
+            string fileName = "strips.xml";
+            StripsModel model = new StripsModel(fileName);
+            model.Load();
+        }
+
     }
 }

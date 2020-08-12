@@ -5,13 +5,13 @@ using System;
 namespace StripSegments
 {
     /// <summary>Класс Сегмента Полосы.</summary>
-    public class StripSegment : OnPropertyChangedClass, ICloneable<StripSegment>, IDto<StripSegmentDto>
+    public class StripSegment : OnPropertyChangedClass, ICloneable<StripSegment>, IDto<SegmentDto>
     {
         #region Поля, хранящие значения одноимённых свойств
         private double _begin;
         private double _end;
         private double _length;
-        private StripSegmentDto _dto;
+        private SegmentDto _dto;
         #endregion
 
         /// <summary>Начало Сегмента.</summary>
@@ -50,15 +50,15 @@ namespace StripSegments
         #endregion
 
         #region Реализация интерфейса IDto<StripSegmentDto>
-        public StripSegmentDto Dto { get => _dto; private set => SetProperty(ref _dto, value); }
-        public void SetDto(StripSegmentDto newDto) => CopyFrom(Dto = newDto);
+        public SegmentDto Dto { get => _dto; private set => SetProperty(ref _dto, value); }
+        public void SetDto(SegmentDto newDto) => CopyFrom(Dto = newDto);
 
         #region Реализация интерфейса ICopy<StripSegmentDto>
-        public StripSegmentDto Copy() => new StripSegmentDto(Begin, End);
+        public SegmentDto Copy() => new SegmentDto(Begin, End);
 
-        public void CopyFrom(StripSegmentDto dto) => (Begin, End) = (dto.Begin, dto.End);
+        public void CopyFrom(SegmentDto dto) => (Begin, End) = (dto.Begin, dto.End);
 
-        public void CopyTo(StripSegmentDto obj)
+        public void CopyTo(SegmentDto obj)
         {
             throw new NotImplementedException();
         }

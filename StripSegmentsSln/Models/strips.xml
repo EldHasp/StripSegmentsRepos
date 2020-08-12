@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
-  <range>
-      <segment id="11111" begin="140.45" end="300.3"/>
-  </range>
+  <range id="11111" begin="140.45" end="300.3"/>
   <strips>
     <strip id="1" name="первый">
       <segment id="1" begin="123.45" end="145.3"/>

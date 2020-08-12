@@ -41,12 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StripsModel.cs" />
+    <Compile Include="StripDto.cs" />
+    <Compile Include="StripsModel - Async Methods.cs" />
+    <Compile Include="StripsModel - Repos.cs" />
+    <Compile Include="StripsModel - GetCollectionl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StripSegmentDto.cs" />
+    <Compile Include="SegmentDto.cs" />
+    <Compile Include="StripXmlClasses.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="strips.xml" />
+    <Content Include="strips.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
