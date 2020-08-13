@@ -55,7 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LengthScaleConverter.cs" />
+    <Compile Include="OffsetScaleConverter.cs" />
     <Compile Include="SegmentList.cs" />
+    <Compile Include="Strip.cs" />
     <Compile Include="StripSegment.cs" />
     <Compile Include="StripUC.xaml.cs">
       <DependentUpon>StripUC.xaml</DependentUpon>

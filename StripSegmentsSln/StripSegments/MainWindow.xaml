@@ -7,15 +7,29 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1200">
     <Window.Resources>
-        <local:SegmentList x:Key="SegmentList">
+        <!--<local:SegmentList x:Key="SegmentList">
             <local:StripSegment  Begin="-100" End="200"/>
             <local:StripSegment  Begin="300" End="600"/>
             <local:StripSegment  Begin="700" End="1100"/>
-        </local:SegmentList>
+        </local:SegmentList>-->
+        
+        <!--Можно менять значения и сразу видно
+        как это влияет на Отображение-->
+        <local:Strip x:Key="strip">
+            <local:Strip.Range>
+                <local:StripSegment Begin="100" End="800"/>
+            </local:Strip.Range>
+            <local:Strip.Segments>
+                <local:StripSegment  Begin="0" End="200"/>
+                <local:StripSegment  Begin="300" End="600"/>
+                <local:StripSegment  Begin="700" End="1100"/>
+            </local:Strip.Segments>
+        </local:Strip>
     </Window.Resources>
     <Grid>
         <local:StripUC x:Name="stripView" Height="40" Margin="100"
-                       SegmentsSource="{Binding Mode=OneWay, Source={StaticResource SegmentList}}"
-                       BorderBrush="Green" BorderThickness="1"/>
-    </Grid>
+                       BorderBrush="Green" BorderThickness="1"
+                       Strip="{Binding Mode=OneWay, Source={StaticResource strip}}"/>
+                        <!--SegmentsSource="{Binding Mode=OneWay, Source={StaticResource SegmentList}}"-->
+   </Grid>
 </Window>

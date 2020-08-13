@@ -14,14 +14,17 @@ namespace Models
         public string Name { get; }
 
         /// <summary>Сегменты Полосы.</summary>
-        public IReadOnlyCollection<SegmentDto> Segments { get; }
+        public IReadOnlyList<SegmentDto> Segments { get; }
 
         /// <summary>Диапазон полосы.</summary>
         public SegmentDto Range { get; }
 
         public StripDto(int id, string name, IEnumerable<SegmentDto> segments, SegmentDto range)
+            : this(name, segments, range)
+            => Id = id;
+
+        public StripDto(string name, IEnumerable<SegmentDto> segments, SegmentDto range)
         {
-            Id = id;
             Name = name;
             Segments = segments.ToList().AsReadOnly();
             Range = range;

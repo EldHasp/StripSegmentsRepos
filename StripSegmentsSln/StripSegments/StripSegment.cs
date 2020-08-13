@@ -56,14 +56,22 @@ namespace StripSegments
         #region Реализация интерфейса ICopy<StripSegmentDto>
         public SegmentDto Copy() => new SegmentDto(Begin, End);
 
-        public void CopyFrom(SegmentDto dto) => (Begin, End) = (dto.Begin, dto.End);
+        public void CopyFrom(SegmentDto dto) => CopyFrom(this, dto);
+        public static void CopyFrom(StripSegment segment, SegmentDto dto) => (segment.Begin, segment.End) = (dto.Begin, dto.End);
 
-        public void CopyTo(SegmentDto obj)
+        public void CopyTo(SegmentDto obj) => throw new NotImplementedException();
+
+        #endregion
+        #endregion
+
+        /// <summary>Создание StripSegment по данным из SegmentDto.</summary>
+        /// <param name="dto">DTO с данными.</param>
+        /// <returns>Новый экземпляр StripSegment с данными из полученного SegmentDto.</returns>
+        public static StripSegment Create(SegmentDto dto)
         {
-            throw new NotImplementedException();
+            StripSegment strip = new StripSegment();
+            CopyFrom(strip, dto);
+            return strip;
         }
-
-        #endregion
-        #endregion
     }
 }

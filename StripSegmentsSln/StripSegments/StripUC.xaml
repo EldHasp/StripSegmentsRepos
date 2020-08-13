@@ -8,10 +8,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <local:LengthScaleConverter x:Key="LenghtScaleConverter"/>
+        <local:OffsetScaleConverter x:Key="OffsetScaleConverter"/>
         <DataTemplate x:Key="Segment.Template" DataType="{x:Type local:StripSegment}">
             <Rectangle Height="{Binding ActualHeight, ElementName=PART_Main, Mode=OneWay}"
-                       Width="{Binding Length}"
-                       Fill="Yellow" Opacity="0.5"/>
+                       Fill="Yellow" Opacity="0.5">
+                <Rectangle.Width>
+                    <MultiBinding Converter="{StaticResource LenghtScaleConverter}">
+                        <Binding Path="Length"/>
+                        <Binding Path="Strip.Range.Length" ElementName="PART_Main"/>
+                        <Binding Path="ActualWidth" ElementName="PART_Main"/>
+                    </MultiBinding>
+                </Rectangle.Width>
+            </Rectangle>
         </DataTemplate>
         <ItemsPanelTemplate x:Key="Strip.PanelTemplate">
             <Canvas Width="{Binding ActualWidth, ElementName=PART_Main, Mode=OneWay}"
@@ -19,7 +28,16 @@
                         ClipToBounds="True"/>
         </ItemsPanelTemplate>
         <Style x:Key="Segment.Item.Style" TargetType="ContentPresenter">
-            <Setter Property="Canvas.Left" Value="{Binding Begin}"/>
+            <Setter Property="Canvas.Left" >
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource OffsetScaleConverter}">
+                        <Binding Path="Begin"/>
+                        <Binding Path="Strip.Range.Begin" ElementName="PART_Main"/>
+                        <Binding Path="Strip.Range.Length" ElementName="PART_Main"/>
+                        <Binding Path="ActualWidth" ElementName="PART_Main"/>
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
 

@@ -14,15 +14,35 @@ namespace StripSegments
             InitializeComponent();
         }
 
-        /// <summary>Источник последовательности Сегментов.</summary>
+        /// <summary>Полоса с данными.</summary>
+        public Strip Strip
+        {
+            get { return (Strip)GetValue(StripProperty); }
+            set { SetValue(StripProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Strip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StripProperty =
+            DependencyProperty.Register(nameof(Strip), typeof(Strip), typeof(StripUC), new PropertyMetadata(null, StripChanged));
+
+        private static void StripChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            StripUC stripUC = (StripUC)d;
+            stripUC.SegmentsSource = stripUC.Strip?.Segments;
+        }
+
+        /// <summary>Источник последовательности Сегментов.
+        /// Свойство Только Для Чтения.</summary>
         public IEnumerable<StripSegment> SegmentsSource
         {
             get { return (IEnumerable<StripSegment>)GetValue(SegmentsSourceProperty); }
-            set { SetValue(SegmentsSourceProperty, value); }
+            private set { SetValue(SegmentsSourcePropertyKey, value); }
         }
 
         // Using a DependencyProperty as the backing store for SegmentsSource.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SegmentsSourceProperty =
-            DependencyProperty.Register(nameof(SegmentsSource), typeof(IEnumerable<StripSegment>), typeof(StripUC), new PropertyMetadata(null));
+        private static readonly DependencyPropertyKey SegmentsSourcePropertyKey =
+            DependencyProperty.RegisterReadOnly(nameof(SegmentsSource), typeof(IEnumerable<StripSegment>), typeof(StripUC), new PropertyMetadata(null));
+        public static readonly DependencyProperty SegmentsSourceProperty = SegmentsSourcePropertyKey.DependencyProperty;
     }
+
 }
