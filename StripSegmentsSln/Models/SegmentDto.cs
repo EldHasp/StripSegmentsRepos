@@ -16,8 +16,12 @@ namespace Models
         /// <summary>Конструктор с заданием Начала и Конца сегмента.</summary>
         /// <param name="begin">Начало Сегмента.</param>
         /// <param name="end">Конец Сегмента.</param>
+        /// <remarks>Свойству Begin присваивается меньшее из begin и end,
+        /// Свойству End - большее.</remarks>
         public SegmentDto(double begin, double end)
         {
+            if (begin > end)
+                (begin, end) = (end, begin);
             Begin = begin;
             End = end;
         }

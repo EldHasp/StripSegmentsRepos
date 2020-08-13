@@ -34,7 +34,7 @@ namespace StripSegments
             // Изменение значений существующих элементов
             int i;
             for (i = 0; i < Segments.Count && i < dto.Segments.Count; i++)
-                Segments[i].CopyFrom(dto.Segments[i]);
+                Segments[i].SetDto(dto.Segments[i]);
 
             // Удаление лишних элементов
             if (i < Segments.Count)

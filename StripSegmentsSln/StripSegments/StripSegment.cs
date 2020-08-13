@@ -30,7 +30,14 @@ namespace StripSegments
             {
                 // Если изменяется Начало или Конец, то пересчитывается Длина.
                 case nameof(End):
+                    if (End < Begin)
+                        End = Begin;
+                    Length = End - Begin;
+                    break;
+
                 case nameof(Begin):
+                    if (Begin > End)
+                        Begin = End;
                     Length = End - Begin;
                     break;
 
@@ -70,7 +77,7 @@ namespace StripSegments
         public static StripSegment Create(SegmentDto dto)
         {
             StripSegment strip = new StripSegment();
-            CopyFrom(strip, dto);
+            strip.SetDto(dto);
             return strip;
         }
     }

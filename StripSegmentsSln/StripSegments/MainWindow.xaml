@@ -20,9 +20,9 @@
                 <local:StripSegment Begin="100" End="800"/>
             </local:Strip.Range>
             <local:Strip.Segments>
-                <local:StripSegment  Begin="0" End="200"/>
-                <local:StripSegment  Begin="300" End="600"/>
-                <local:StripSegment  Begin="700" End="1100"/>
+                <local:StripSegment End="200" Begin="0"/>
+                <local:StripSegment End="600" Begin="300"/>
+                <local:StripSegment End="1100" Begin="700"/>
             </local:Strip.Segments>
         </local:Strip>
     </Window.Resources>
