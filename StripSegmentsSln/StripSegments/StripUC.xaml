@@ -1,0 +1,31 @@
+﻿<UserControl x:Name="PART_Main"
+             x:Class="StripSegments.StripUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StripSegments"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="Segment.Template" DataType="{x:Type local:StripSegment}">
+            <Rectangle Height="{Binding ActualHeight, ElementName=PART_Main, Mode=OneWay}"
+                       Width="{Binding Length}"
+                       Fill="Yellow" Opacity="0.5"/>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="Strip.PanelTemplate">
+            <Canvas Width="{Binding ActualWidth, ElementName=PART_Main, Mode=OneWay}"
+                        Height="{Binding ActualHeight, ElementName=PART_Main, Mode=OneWay}"
+                        ClipToBounds="True"/>
+        </ItemsPanelTemplate>
+        <Style x:Key="Segment.Item.Style" TargetType="ContentPresenter">
+            <Setter Property="Canvas.Left" Value="{Binding Begin}"/>
+        </Style>
+    </UserControl.Resources>
+
+    <ItemsControl ItemsSource="{Binding SegmentsSource, ElementName=PART_Main}"
+                  ItemTemplate="{Binding Mode=OneWay, Source={StaticResource Segment.Template}}"
+                  ItemContainerStyle="{Binding Mode=OneWay, Source={StaticResource Segment.Item.Style}}" 
+                  ItemsPanel="{StaticResource Strip.PanelTemplate}"/>
+
+</UserControl>

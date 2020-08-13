@@ -31,7 +31,7 @@ namespace StripSegments
                 // Если изменяется Начало или Конец, то пересчитывается Длина.
                 case nameof(End):
                 case nameof(Begin):
-                    Length = Begin - End;
+                    Length = End - Begin;
                     break;
 
                 // Если изменяется длина, то пересчитывается Конец.

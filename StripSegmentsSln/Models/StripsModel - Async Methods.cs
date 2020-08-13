@@ -17,7 +17,7 @@ namespace Models
         /// <summary>Перегрузка для использовании в Task.</summary>
         /// <param name="range">Дипазон фильтрации Сегментов.</param>
         /// <returns>Неизменяемую коллекцию всех Полос с Сегментами из заданного диапазона.</returns>
-        public IReadOnlyCollection<StripDto> GetStrips(object range)
+        protected IReadOnlyCollection<StripDto> GetStrips(object range)
             => GetStrips((SegmentDto)range);
 
         /// <summary>Асинхронная загрузка данных.</summary>
