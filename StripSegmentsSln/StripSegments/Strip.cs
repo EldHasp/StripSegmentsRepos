@@ -2,27 +2,31 @@
 using Models;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Markup;
 
 namespace StripSegments
 {
     /// <summary>Класс Полосы.</summary>
+    [ContentProperty(nameof(Segments))]
+    [DefaultProperty(nameof(Segments))]
     public class Strip : OnPropertyChangedClass, ICloneable<Strip>, IDto<StripDto>
     {
         #region Поля, хранящие значения одноимённых свойств
         private string _name;
         private StripDto _dto;
-        private StripSegment _range;
+        private Segment _range;
         #endregion
 
         /// <summary>Имя Полосы.</summary>
         public string Name { get => _name; set => SetProperty(ref _name, value); }
 
         /// <summary>Сегменты Полосы.</summary>
-        public ObservableCollection<StripSegment> Segments { get; }
-            = new ObservableCollection<StripSegment>();
+        public ObservableCollection<Segment> Segments { get; }
+            = new ObservableCollection<Segment>();
 
         /// <summary>Диапазон полосы.</summary>
-        public StripSegment Range { get => _range; set => SetProperty(ref _range, value); }
+        public Segment Range { get => _range; set => SetProperty(ref _range, value); }
 
         public StripDto Copy() => throw new NotImplementedException();
 
@@ -44,7 +48,7 @@ namespace StripSegments
             // Добавление нехватающих элементов
             else if (i < dto.Segments.Count)
                 for (; i < dto.Segments.Count; i++)
-                    Segments.Add(StripSegment.Create(dto.Segments[i]));
+                    Segments.Add(Segment.Create(dto.Segments[i]));
 
         }
 

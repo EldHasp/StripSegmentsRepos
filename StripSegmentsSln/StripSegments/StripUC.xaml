@@ -10,21 +10,21 @@
     <UserControl.Resources>
         <local:LengthScaleConverter x:Key="LenghtScaleConverter"/>
         <local:OffsetScaleConverter x:Key="OffsetScaleConverter"/>
-        <DataTemplate x:Key="Segment.Template" DataType="{x:Type local:StripSegment}">
-            <Rectangle Height="{Binding ActualHeight, ElementName=PART_Main, Mode=OneWay}"
+        <DataTemplate x:Key="Segment.Template" DataType="{x:Type local:Segment}">
+            <Rectangle Height="{Binding ActualHeight, ElementName=PART_ic, Mode=OneWay}"
                        Fill="Yellow" Opacity="0.5">
                 <Rectangle.Width>
                     <MultiBinding Converter="{StaticResource LenghtScaleConverter}">
                         <Binding Path="Length"/>
                         <Binding Path="Strip.Range.Length" ElementName="PART_Main"/>
-                        <Binding Path="ActualWidth" ElementName="PART_Main"/>
+                        <Binding Path="ActualWidth" ElementName="PART_ic"/>
                     </MultiBinding>
                 </Rectangle.Width>
             </Rectangle>
         </DataTemplate>
         <ItemsPanelTemplate x:Key="Strip.PanelTemplate">
-            <Canvas Width="{Binding ActualWidth, ElementName=PART_Main, Mode=OneWay}"
-                        Height="{Binding ActualHeight, ElementName=PART_Main, Mode=OneWay}"
+            <Canvas Width="{Binding ActualWidth, ElementName=PART_ic, Mode=OneWay}"
+                        Height="{Binding ActualHeight, ElementName=PART_ic, Mode=OneWay}"
                         ClipToBounds="True"/>
         </ItemsPanelTemplate>
         <Style x:Key="Segment.Item.Style" TargetType="ContentPresenter">
@@ -41,7 +41,8 @@
         </Style>
     </UserControl.Resources>
 
-    <ItemsControl ItemsSource="{Binding SegmentsSource, ElementName=PART_Main}"
+    <ItemsControl x:Name="PART_ic"
+                  ItemsSource="{Binding SegmentsSource, ElementName=PART_Main}"
                   ItemTemplate="{Binding Mode=OneWay, Source={StaticResource Segment.Template}}"
                   ItemContainerStyle="{Binding Mode=OneWay, Source={StaticResource Segment.Item.Style}}" 
                   ItemsPanel="{StaticResource Strip.PanelTemplate}"/>

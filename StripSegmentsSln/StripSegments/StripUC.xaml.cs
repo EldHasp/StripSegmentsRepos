@@ -33,15 +33,15 @@ namespace StripSegments
 
         /// <summary>Источник последовательности Сегментов.
         /// Свойство Только Для Чтения.</summary>
-        public IEnumerable<StripSegment> SegmentsSource
+        public IEnumerable<Segment> SegmentsSource
         {
-            get { return (IEnumerable<StripSegment>)GetValue(SegmentsSourceProperty); }
+            get { return (IEnumerable<Segment>)GetValue(SegmentsSourceProperty); }
             private set { SetValue(SegmentsSourcePropertyKey, value); }
         }
 
         // Using a DependencyProperty as the backing store for SegmentsSource.  This enables animation, styling, binding, etc...
         private static readonly DependencyPropertyKey SegmentsSourcePropertyKey =
-            DependencyProperty.RegisterReadOnly(nameof(SegmentsSource), typeof(IEnumerable<StripSegment>), typeof(StripUC), new PropertyMetadata(null));
+            DependencyProperty.RegisterReadOnly(nameof(SegmentsSource), typeof(IEnumerable<Segment>), typeof(StripUC), new PropertyMetadata(null));
         public static readonly DependencyProperty SegmentsSourceProperty = SegmentsSourcePropertyKey.DependencyProperty;
     }
 

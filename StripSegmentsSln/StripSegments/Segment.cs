@@ -5,7 +5,7 @@ using System;
 namespace StripSegments
 {
     /// <summary>Класс Сегмента Полосы.</summary>
-    public class StripSegment : OnPropertyChangedClass, ICloneable<StripSegment>, IDto<SegmentDto>
+    public class Segment : OnPropertyChangedClass, ICloneable<Segment>, IDto<SegmentDto>
     {
         #region Поля, хранящие значения одноимённых свойств
         private double _begin;
@@ -30,14 +30,7 @@ namespace StripSegments
             {
                 // Если изменяется Начало или Конец, то пересчитывается Длина.
                 case nameof(End):
-                    if (End < Begin)
-                        End = Begin;
-                    Length = End - Begin;
-                    break;
-
                 case nameof(Begin):
-                    if (Begin > End)
-                        Begin = End;
                     Length = End - Begin;
                     break;
 
@@ -52,7 +45,7 @@ namespace StripSegments
         }
 
         #region Реализация интерфейса ICloneable<StripSegment>
-        public StripSegment Clone() => (StripSegment)((ICloneable)this).Clone();
+        public Segment Clone() => (Segment)((ICloneable)this).Clone();
         object ICloneable.Clone() => MemberwiseClone();
         #endregion
 
@@ -64,7 +57,7 @@ namespace StripSegments
         public SegmentDto Copy() => new SegmentDto(Begin, End);
 
         public void CopyFrom(SegmentDto dto) => CopyFrom(this, dto);
-        public static void CopyFrom(StripSegment segment, SegmentDto dto) => (segment.Begin, segment.End) = (dto.Begin, dto.End);
+        public static void CopyFrom(Segment segment, SegmentDto dto) => (segment.Begin, segment.End) = (dto.Begin, dto.End);
 
         public void CopyTo(SegmentDto obj) => throw new NotImplementedException();
 
@@ -74,9 +67,9 @@ namespace StripSegments
         /// <summary>Создание StripSegment по данным из SegmentDto.</summary>
         /// <param name="dto">DTO с данными.</param>
         /// <returns>Новый экземпляр StripSegment с данными из полученного SegmentDto.</returns>
-        public static StripSegment Create(SegmentDto dto)
+        public static Segment Create(SegmentDto dto)
         {
-            StripSegment strip = new StripSegment();
+            Segment strip = new Segment();
             strip.SetDto(dto);
             return strip;
         }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-
-namespace Models
+﻿namespace Models
 {
     /// <summary>DTO-класс Сегмента Полосы.</summary>
-    public class SegmentDto : IEquatable<SegmentDto>
+    public class SegmentDto
     {
         /// <summary>Идентификатор.</summary>
         public int Id { get; }
@@ -20,10 +17,10 @@ namespace Models
         /// Свойству End - большее.</remarks>
         public SegmentDto(double begin, double end)
         {
-            if (begin > end)
-                (begin, end) = (end, begin);
-            Begin = begin;
-            End = end;
+            if (begin < end)
+                (Begin, End) = (begin, end);
+            else
+                (Begin, End) = (end, begin);
         }
 
         /// <summary>Конструктор с заданием всех свойств.</summary>
@@ -37,25 +34,6 @@ namespace Models
         public static SegmentDto Epmty { get; }
             = new SegmentDto(default, default);
 
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as SegmentDto);
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCode = 1903003160;
-            hashCode = hashCode * -1521134295 + Begin.GetHashCode();
-            hashCode = hashCode * -1521134295 + End.GetHashCode();
-            return hashCode;
-        }
-
-        public bool Equals(SegmentDto other)
-        {
-            return other != null &&
-                   Begin == other.Begin &&
-                   End == other.End;
-        }
     }
 
 }

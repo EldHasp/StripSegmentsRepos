@@ -7,29 +7,33 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1200">
     <Window.Resources>
-        <!--<local:SegmentList x:Key="SegmentList">
-            <local:StripSegment  Begin="-100" End="200"/>
-            <local:StripSegment  Begin="300" End="600"/>
-            <local:StripSegment  Begin="700" End="1100"/>
-        </local:SegmentList>-->
-        
+
         <!--Можно менять значения и сразу видно
         как это влияет на Отображение-->
-        <local:Strip x:Key="strip">
-            <local:Strip.Range>
-                <local:StripSegment Begin="100" End="800"/>
-            </local:Strip.Range>
-            <local:Strip.Segments>
-                <local:StripSegment End="200" Begin="0"/>
-                <local:StripSegment End="600" Begin="300"/>
-                <local:StripSegment End="1100" Begin="700"/>
-            </local:Strip.Segments>
-        </local:Strip>
+        <local:StripList x:Key="stripList">
+            <local:Strip>
+                <local:Strip.Range>
+                    <local:Segment Begin="100" End="800"/>
+                </local:Strip.Range>
+                <local:Segment Begin="0" End="200"/>
+                <local:Segment Begin="300" End="600"/>
+                <local:Segment Begin="700" End="1100"/>
+            </local:Strip>
+            <local:Strip>
+                <local:Strip.Range>
+                    <local:Segment Begin="100" End="800"/>
+                </local:Strip.Range>
+                <local:Segment Begin="50" End="250"/>
+                <local:Segment Begin="300" End="400"/>
+                <local:Segment Begin="500" End="650"/>
+                <local:Segment Begin="750" End="1000"/>
+            </local:Strip>
+        </local:StripList>
+
     </Window.Resources>
     <Grid>
-        <local:StripUC x:Name="stripView" Height="40" Margin="100"
+        <local:StripsUC x:Name="stripView" Margin="100"
                        BorderBrush="Green" BorderThickness="1"
-                       Strip="{Binding Mode=OneWay, Source={StaticResource strip}}"/>
-                        <!--SegmentsSource="{Binding Mode=OneWay, Source={StaticResource SegmentList}}"-->
-   </Grid>
+                       StripsSource="{Binding Mode=OneWay, Source={StaticResource stripList}}"/>
+    </Grid>
 </Window>
