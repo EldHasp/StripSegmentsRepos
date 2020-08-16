@@ -64,9 +64,9 @@ namespace StripSegments
         #endregion
         #endregion
 
-        /// <summary>Создание StripSegment по данным из SegmentDto.</summary>
+        /// <summary>Создание Segment по данным из SegmentDto.</summary>
         /// <param name="dto">DTO с данными.</param>
-        /// <returns>Новый экземпляр StripSegment с данными из полученного SegmentDto.</returns>
+        /// <returns>Новый экземпляр Segment с данными из полученного SegmentDto.</returns>
         public static Segment Create(SegmentDto dto)
         {
             Segment strip = new Segment();

@@ -48,6 +48,7 @@
     <Compile Include="BooleanNotConverter.cs" />
     <Compile Include="BooleanToVisibilityConverter.cs" />
     <Compile Include="DictionaryKeyToValueConverter.cs" />
+    <Compile Include="DoubleMediumConverter.cs" />
     <Compile Include="ICloneableT.cs" />
     <Compile Include="ICopyT.cs" />
     <Compile Include="IDto.cs" />

@@ -58,12 +58,15 @@
     <Compile Include="LengthScaleConverter.cs" />
     <Compile Include="OffsetScaleConverter.cs" />
     <Compile Include="SegmentList.cs" />
+    <Compile Include="SizeToValueConverter.cs" />
     <Compile Include="Strip.cs" />
     <Compile Include="Segment.cs" />
     <Compile Include="StripList.cs" />
     <Compile Include="StripsUC.xaml.cs">
       <DependentUpon>StripsUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StripsViewModel.cs" />
+    <Compile Include="StripsViewModelProperties.cs" />
     <Compile Include="StripUC.xaml.cs">
       <DependentUpon>StripUC.xaml</DependentUpon>
     </Compile>

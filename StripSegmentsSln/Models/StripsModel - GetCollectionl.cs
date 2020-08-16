@@ -10,12 +10,31 @@ namespace Models
         /// <summary>Синхронное получение всех Полос с Сегментами из заданного диапазона.</summary>
         /// <param name="range">Диапазон фильтрации Сегментов.</param>
         /// <returns>Неизменяемую коллекцию всех Полос с Сегментами из заданного диапазона.</returns>
-        public IReadOnlyCollection<StripDto> GetStrips(SegmentDto range)
+        public IReadOnlyList<StripDto> GetStrips(SegmentDto range)
         {
 
             // Запоминание диапазона запроса.
-            Range.begin = range.Begin;
-            Range.end = range.End;
+            // С учётом не выхода за границу Полос.
+            if (range.End - range.Begin >= Size.end - Size.begin)
+            {
+                Range.begin = Size.begin;
+                Range.end = Size.end;
+            }
+            else if (range.Begin > Size.begin && range.End < Size.end)
+            {
+                Range.begin = range.Begin;
+                Range.end = range.End;
+            }
+            else if (range.Begin <= Size.begin)
+            {
+                Range.begin = Size.begin;
+                Range.end = Size.begin + range.End - range.Begin;
+            }
+            else
+            {
+                Range.end = Size.end;
+                Range.begin = Size.end - range.End + range.Begin;
+            }
 
             // Создание списка полос.
             List<StripDto> list = new List<StripDto>(Strips.Count);
@@ -62,6 +81,12 @@ namespace Models
                 .OrderBy(sg => sg.Begin)
                 .ToList().AsReadOnly();
         }
+
+        // Получение шага промотки.
+        public double GetStep() => Step;
+
+        // Получение размера Полос.
+        public SegmentDto GetSize() => CopyToDto(Size);
 
         // Получение Диапазона последнего запроса.
         public SegmentDto GetRange() => CopyToDto(Range);

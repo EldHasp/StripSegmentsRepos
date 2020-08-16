@@ -23,6 +23,12 @@ namespace Models
         /// <summary>Полный контейнер с данными.</summary>
         protected RootXml RootXml { get; set; }
 
+        /// <summary>Шаг промотки.</summary>
+        protected double Step => RootXml.step;
+
+        /// <summary>Обший размер полос.</summary>
+        protected SegmentXml Size => RootXml.size;
+
         /// <summary>Диапазон фильтрации из последнего запроса.</summary>
         protected SegmentXml Range => RootXml.range;
 
@@ -50,14 +56,5 @@ namespace Models
             using (FileStream file = File.Create(FileName))
                 serlz.Serialize(file, RootXml);
         }
-
-        //static int CompareSegmentXml(SegmentXml left, SegmentXml right)
-        //{
-        //    if (left == null)
-        //        return right == null ? 0 : -1;
-        //    if (right == null)
-        //        return 1;
-        //    return left.begin.CompareTo(right.begin);
-        //}
     }
 }

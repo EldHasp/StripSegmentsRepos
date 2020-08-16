@@ -33,7 +33,10 @@ namespace StripSegments
         public void CopyFrom(StripDto dto)
         {
             Name = dto.Name;
-            Range.CopyFrom(dto.Range);
+            if (Range == null)
+                Range = Segment.Create(dto.Range);
+            else
+                Range.CopyFrom(dto.Range);
 
             // Изменение значений существующих элементов
             int i;
@@ -62,6 +65,16 @@ namespace StripSegments
         #region Реализация интерфейса ICloneable<StripSegment>
         public Strip Clone() => (Strip)((ICloneable)this).Clone();
         object ICloneable.Clone() => MemberwiseClone();
+
+        /// <summary>Создание Strip по данным из StripDto.</summary>
+        /// <param name="dto">DTO с данными.</param>
+        /// <returns>Новый экземпляр Strip с данными из полученного StripDto.</returns>
+        public static Strip Create(StripDto stripDto)
+        {
+            Strip strip = new Strip();
+            strip.SetDto(stripDto);
+            return strip;
+        }
         #endregion
     }
 }

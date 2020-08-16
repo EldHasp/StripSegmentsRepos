@@ -8,12 +8,18 @@ namespace StripSegments
     /// </summary>
     public partial class App : Application
     {
-        public App()
-        {// В этой строке точка останова. После останова дальше по F11.
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
             string fileName = "strips.xml";
             StripsModel model = new StripsModel(fileName);
-            model.Load();
-        }
 
+            StripsViewModel viewModel = new StripsViewModel(model);
+
+            MainWindow = new MainWindow() { DataContext = viewModel };
+
+            MainWindow.Show();
+
+            viewModel.Load();
+        }
     }
 }

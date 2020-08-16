@@ -12,6 +12,11 @@ namespace Models
     [XmlRoot(Namespace = "", IsNullable = false, ElementName = "root")]
     public class RootXml
     {
+        [XmlElement()]
+        public double step { get; set; }
+
+        [XmlElement()]
+        public SegmentXml size { get; set; }
 
         [XmlElement()]
         public SegmentXml range { get; set; }

@@ -1,20 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
-  <range id="11111" begin="140.45" end="300.3"/>
+  <step>10</step>
+  <size id="111" begin="50" end="350"/>
+  <range id="11111" begin="150" end="250"/>
   <strips>
     <strip id="1" name="первый">
       <segment id="1" begin="123.45" end="145.3"/>
       <segment id="2" begin="175.45" end="195.3"/>
       <segment id="3" begin="230.45" end="245.3"/>
       <segment id="4" begin="253.45" end="265.3"/>
-      <segment id="5555" begin="293.45" end="345.3"/>
+      <segment id="5555" begin="293.45" end="320"/>
     </strip>
     <strip id="3434" name="второй">
-      <segment id="1" begin="123.45" end="145.3"/>
-      <segment id="2" begin="175.45" end="195.3"/>
-      <segment id="3" begin="230.45" end="245.3"/>
-      <segment id="4" begin="253.45" end="265.3"/>
-      <segment id="5555" begin="293.45" end="345.3"/>
+      <segment id="1" begin="103" end="150"/>
+      <segment id="2" begin="155" end="200"/>
+      <segment id="3" begin="210" end="260"/>
+      <segment id="4" begin="270" end="345"/>
     </strip>
   </strips>
 </root>

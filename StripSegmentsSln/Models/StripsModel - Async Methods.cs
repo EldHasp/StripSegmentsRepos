@@ -11,13 +11,13 @@ namespace Models
         /// <param name="range">Диапазон фильтрации Сегментов.</param>
         /// <returns>Выполняемую задачу результатом которой является неизменяемая коллекция
         /// всех Полос с Сегментами из заданного диапазона.</returns>
-        public Task<IReadOnlyCollection<StripDto>> GetStripsAsync(SegmentDto range)
+        public Task<IReadOnlyList<StripDto>> GetStripsAsync(SegmentDto range)
             => Task.Factory.StartNew(GetStrips, range);
 
         /// <summary>Перегрузка для использовании в Task.</summary>
         /// <param name="range">Дипазон фильтрации Сегментов.</param>
         /// <returns>Неизменяемую коллекцию всех Полос с Сегментами из заданного диапазона.</returns>
-        protected IReadOnlyCollection<StripDto> GetStrips(object range)
+        protected IReadOnlyList<StripDto> GetStrips(object range)
             => GetStrips((SegmentDto)range);
 
         /// <summary>Асинхронная загрузка данных.</summary>

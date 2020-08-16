@@ -3,37 +3,83 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StripSegments"
+        xmlns:local="clr-namespace:StripSegments" xmlns:comm="clr-namespace:Common;assembly=Common"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1200">
+        Title="MainWindow" Height="450" Width="1200"
+        >
     <Window.Resources>
 
         <!--Можно менять значения и сразу видно
         как это влияет на Отображение-->
-        <local:StripList x:Key="stripList">
-            <local:Strip>
-                <local:Strip.Range>
-                    <local:Segment Begin="100" End="800"/>
-                </local:Strip.Range>
-                <local:Segment Begin="0" End="200"/>
-                <local:Segment Begin="300" End="600"/>
-                <local:Segment Begin="700" End="1100"/>
-            </local:Strip>
-            <local:Strip>
-                <local:Strip.Range>
-                    <local:Segment Begin="100" End="800"/>
-                </local:Strip.Range>
-                <local:Segment Begin="50" End="250"/>
-                <local:Segment Begin="300" End="400"/>
-                <local:Segment Begin="500" End="650"/>
-                <local:Segment Begin="750" End="1000"/>
-            </local:Strip>
-        </local:StripList>
-
+        <local:Segment x:Key="range" Begin="100" End="800"/>
+        <local:Segment x:Key="size" Begin="-500" End="1800"/>
+        <local:StripsViewModelProperties
+            x:Key="viewModelDisigned"
+            Range="{StaticResource range}"
+            Size="{StaticResource size}"
+            Step="10">
+            <local:StripsViewModelProperties.Strips>
+                <local:Strip Range="{StaticResource range}">
+                    <local:Segment Begin="0" End="200"/>
+                    <local:Segment Begin="300" End="600"/>
+                    <local:Segment Begin="700" End="1100"/>
+                </local:Strip>
+                <local:Strip Range="{StaticResource range}">
+                    <local:Segment Begin="50" End="250"/>
+                    <local:Segment Begin="300" End="400"/>
+                    <local:Segment Begin="500" End="650"/>
+                    <local:Segment Begin="750" End="1000"/>
+                </local:Strip>
+            </local:StripsViewModelProperties.Strips>
+        </local:StripsViewModelProperties>
+        <comm:DoubleMediumConverter x:Key="DoubleMedium"/>
+        <local:SizeToValueConverter x:Key="SzeConverter"/>
     </Window.Resources>
+    <d:Window.DataContext>
+        <Binding Mode="OneWay" Source="{StaticResource viewModelDisigned}"/>
+    </d:Window.DataContext>
     <Grid>
-        <local:StripsUC x:Name="stripView" Margin="100"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <local:StripsUC x:Name="stripView" Grid.Row="1" Grid.Column="1" Margin="5"
                        BorderBrush="Green" BorderThickness="1"
-                       StripsSource="{Binding Mode=OneWay, Source={StaticResource stripList}}"/>
+                       StripsSource="{Binding Strips}"/>
+        <TextBlock Margin="5" Text="{Binding Size.Begin}"/>
+        <TextBlock Margin="5" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Range.Begin}"/>
+        <TextBlock Margin="5" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding Range.End}"/>
+        <TextBlock Margin="5" Grid.Column="2" Text="{Binding Size.End}"/>
+        <ScrollBar Margin="5" Grid.Row="2" Grid.Column="1" Orientation="Horizontal"
+                   SmallChange="{Binding Step}" ViewportSize="{Binding Range.Length}">
+            <ScrollBar.Value>
+                <MultiBinding Converter="{StaticResource DoubleMedium}" Mode="OneWay">
+                    <Binding Path="Range.Begin"/>
+                    <Binding Path="Range.End"/>
+                </MultiBinding>
+            </ScrollBar.Value>
+            <ScrollBar.Minimum>
+                <MultiBinding Converter="{StaticResource SzeConverter}" ConverterParameter="+" Mode="OneWay">
+                    <Binding Path="Size.Begin"/>
+                    <Binding Path="Range.Length"/>
+                </MultiBinding>
+            </ScrollBar.Minimum>
+            <ScrollBar.Maximum>
+                <MultiBinding Converter="{StaticResource SzeConverter}" ConverterParameter="-" Mode="OneWay">
+                    <Binding Path="Size.End"/>
+                    <Binding Path="Range.Length"/>
+                </MultiBinding>
+            </ScrollBar.Maximum>
+            <ScrollBar.CommandBindings>
+                <CommandBinding Command="{x:Static ScrollBar.LineLeftCommand}" CanExecute="LineLeftCommand_CanExecute" Executed="LineLeftCommand_Executed"/>
+                <CommandBinding Command="{x:Static ScrollBar.LineRightCommand}" CanExecute="LineRightCommand_CanExecute" Executed="LineRightCommand_Executed"/>
+            </ScrollBar.CommandBindings>
+        </ScrollBar>
     </Grid>
 </Window>
