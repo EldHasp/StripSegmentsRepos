@@ -16,8 +16,7 @@ namespace StripSegments
         {
             Model.Load();
             Step = Model.GetStep();
-            Size = Segment.Create(Model.GetSize());
-            Range = Segment.Create(Model.GetRange());
+            Size.CopyFrom(Model.GetSize());
             GetStrips(Model.GetRange());
         }
 
@@ -29,7 +28,7 @@ namespace StripSegments
             if (Application.Current.Dispatcher.CheckAccess())
                 UpdateStrips(strips);
             else
-                Application.Current.Dispatcher.BeginInvoke((Action<IReadOnlyList<StripDto>>)UpdateStrips, strips);
+                _ = Application.Current.Dispatcher.BeginInvoke((Action<IReadOnlyList<StripDto>>)UpdateStrips, strips);
 
         }
 
@@ -45,8 +44,8 @@ namespace StripSegments
 
             // Удаление лишних элементов
             if (i < Strips.Count)
-                for (; i < Strips.Count; i++)
-                    Strips.RemoveAt(i);
+                for (int ii = Strips.Count - 1; i <= ii; ii--)
+                    Strips.RemoveAt(ii);
 
             // Добавление нехватающих элементов
             else if (i < strips.Count)

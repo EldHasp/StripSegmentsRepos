@@ -45,7 +45,7 @@ namespace StripSegments
 
             // Удаление лишних элементов
             if (i < Segments.Count)
-                for (; i < Segments.Count; i++)
+                for (int ii = Segments.Count-1; i <= ii; ii--)
                     Segments.RemoveAt(i);
 
             // Добавление нехватающих элементов

@@ -10,18 +10,16 @@ namespace StripSegments
     {
         #region Поля для хранения значений свойств
         private double _step;
-        private Segment _size = new Segment();
-        private Segment _range = new Segment();
         #endregion
 
         /// <summary>Шаг изменения.</summary>
         public double Step { get => _step; set => SetProperty(ref _step, value); }
 
         /// <summary>Обший размер.</summary>
-        public Segment Size { get => _size; set => SetProperty(ref _size, value); }
+        public Segment Size { get; } = new Segment();
 
         /// <summary>Оторбражаемый диапазон.</summary>
-        public Segment Range { get => _range; set => SetProperty(ref _range, value); }
+        public Segment Range { get ; } = new Segment();
 
         /// <summary>Коллекция полос.</summary>
         public ObservableCollection<Strip> Strips { get; } = new ObservableCollection<Strip>();
