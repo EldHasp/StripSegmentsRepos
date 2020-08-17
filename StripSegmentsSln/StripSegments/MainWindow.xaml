@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StripSegments" xmlns:comm="clr-namespace:Common;assembly=Common"
+        xmlns:local="clr-namespace:StripSegments" xmlns:comm="clr-namespace:Common;assembly=Common" xmlns:ap="clr-namespace:AttachedProperties;assembly=AttachedProperties"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1200"
         >
@@ -12,12 +12,11 @@
         <!--Можно менять значения и сразу видно
         как это влияет на Отображение-->
         <local:Segment x:Key="range" Begin="100" End="800"/>
-        <local:Segment x:Key="size" Begin="-500" End="1800"/>
         <local:StripsViewModelProperties
             x:Key="viewModelDisigned"
-            Range="{StaticResource range}"
-            Size="{StaticResource size}"
-            Step="10">
+            Step="10"
+            Size="{local:SegmentDtoExt Begin=-500, End=1800}"
+            Range="{local:SegmentDtoExt Begin=100, End=800}">
             <local:StripsViewModelProperties.Strips>
                 <local:Strip Range="{StaticResource range}">
                     <local:Segment Begin="0" End="200"/>
@@ -57,29 +56,15 @@
         <TextBlock Margin="5" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding Range.End}"/>
         <TextBlock Margin="5" Grid.Column="2" Text="{Binding Size.End}"/>
         <ScrollBar Margin="5" Grid.Row="2" Grid.Column="1" Orientation="Horizontal"
-                   SmallChange="{Binding Step}" ViewportSize="{Binding Range.Length}">
-            <ScrollBar.Value>
-                <MultiBinding Converter="{StaticResource DoubleMedium}" Mode="OneWay">
-                    <Binding Path="Range.Begin"/>
-                    <Binding Path="Range.End"/>
-                </MultiBinding>
-            </ScrollBar.Value>
-            <ScrollBar.Minimum>
-                <MultiBinding Converter="{StaticResource SzeConverter}" ConverterParameter="+" Mode="OneWay">
-                    <Binding Path="Size.Begin"/>
-                    <Binding Path="Range.Length"/>
-                </MultiBinding>
-            </ScrollBar.Minimum>
-            <ScrollBar.Maximum>
-                <MultiBinding Converter="{StaticResource SzeConverter}" ConverterParameter="-" Mode="OneWay">
-                    <Binding Path="Size.End"/>
-                    <Binding Path="Range.Length"/>
-                </MultiBinding>
-            </ScrollBar.Maximum>
-            <ScrollBar.CommandBindings>
+                   SmallChange="0" ViewportSize="{Binding LengthRange}" Maximum="{Binding MediumMaximum}" Minimum="{Binding MediumMinimum}" Value="{Binding MediumValue}">
+            <!--<ScrollBar.CommandBindings>
                 <CommandBinding Command="{x:Static ScrollBar.LineLeftCommand}" CanExecute="LineLeftCommand_CanExecute" Executed="LineLeftCommand_Executed"/>
                 <CommandBinding Command="{x:Static ScrollBar.LineRightCommand}" CanExecute="LineRightCommand_CanExecute" Executed="LineRightCommand_Executed"/>
-            </ScrollBar.CommandBindings>
+            </ScrollBar.CommandBindings>-->
+            <ap:RoutedCommandBindings.RoutedCommandBindings>
+                <ap:RoutedCommandBinding Command="{Binding PrevStepCommand, Mode=OneWay}" RoutedCommand="{x:Static ScrollBar.LineLeftCommand}"/>
+                <ap:RoutedCommandBinding Command="{Binding NextStepCommand, Mode=OneWay}" RoutedCommand="{x:Static ScrollBar.LineRightCommand}"/>
+            </ap:RoutedCommandBindings.RoutedCommandBindings>
         </ScrollBar>
     </Grid>
 </Window>

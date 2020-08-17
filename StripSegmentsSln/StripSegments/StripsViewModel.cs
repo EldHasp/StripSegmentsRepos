@@ -16,7 +16,7 @@ namespace StripSegments
         {
             Model.Load();
             Step = Model.GetStep();
-            Size.CopyFrom(Model.GetSize());
+            Size = Model.GetSize();
             GetStrips(Model.GetRange());
         }
 
@@ -34,7 +34,7 @@ namespace StripSegments
 
         private void UpdateStrips(IReadOnlyList<StripDto> strips)
         {
-            Range.CopyFrom(Model.GetRange());
+            Range = Model.GetRange();
 
 
             // Изменение значений существующих элементов
